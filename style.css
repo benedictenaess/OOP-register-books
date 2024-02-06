@@ -1,0 +1,77 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+}
+
+.input-container {
+	flex-basis: 30%;
+	background-color: coral;
+	
+}
+
+.book-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 2rem;
+}
+
+input, select, button {
+	height: 2rem;
+}
+
+.display-container {
+	display: flex;
+	flex-basis: 70%;
+	align-items: center;
+	flex-direction: column;
+	background-color: rgb(255, 181, 154);
+}
+
+.button-container {
+	flex-basis: 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	margin-bottom: 1rem;
+}
+
+.button-container button {
+	width: 10rem;
+}
+
+.display-books-container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	flex-basis: 85%;
+	width: 100%;
+	padding: 0 1rem;
+}
+
+.physical-books-header, .audio-books-header {
+	display: flex;
+	height: 2.5rem;
+	font-weight: bold;
+	background-color: azure;
+	border: 2px solid white;
+	border-radius: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.physical-books-header span, .audio-books-header span {
+	flex-basis: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
