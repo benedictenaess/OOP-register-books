@@ -57,14 +57,14 @@ input, select, button {
 	width: 100%;
 	padding: 0 1rem;
 }
-/* 
+
 .display-physical-books {
 	display: none;
 }
 
 .display-audio-books {
 	display: none;
-} */
+}
 
 .physical-books-header, .audio-books-header {
 	display: flex;

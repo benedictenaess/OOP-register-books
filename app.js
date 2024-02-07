@@ -74,6 +74,11 @@ physicalButton.addEventListener('click', () => {
 	UI.renderBooks(books);
 })
 
+audioButton.addEventListener('click', () => {
+	UI.activeTab = 'audio';
+	UI.renderAudioBooks(audiobooks);
+})
+
 //DECLARING AUDIO BOOK CLASS
 class Audiobook extends Book {
 	constructor(title, author, format, narrator) {
@@ -89,6 +94,7 @@ class UI {
 	static renderBooks(books) {
 		displayPhysicalBooksContainer.style.display  = 'block';
 		displayAudioBooksContainer.style.display = 'none';
+		physicalBooksUl.textContent = '';
 
 		if (UI.activeTab === 'physical') {
 			books.forEach((book) => {
@@ -109,11 +115,41 @@ class UI {
 				liRow.classList.add('physical-books-row');
 				deleteButton.classList.add('delete-button');
 
-
 				physicalBooksUl.append(liRow);
 				liRow.append(renderTitle, renderAuthor, renderFormat, renderIsbn, deleteButtonContainer);
 				deleteButtonContainer.append(deleteButton);
 			});
+		}
+	}
+	//---------------------------------
+	static renderAudioBooks(audiobooks) {
+		AudioBooksUl.textContent = '';
+		displayPhysicalBooksContainer.style.display = 'none';
+		displayAudioBooksContainer.style.display = 'block';
+
+		if (UI.activeTab === 'audio') {
+			audiobooks.forEach((audiobook) => {
+				const liRow = document.createElement('li');
+				const renderTitle = document.createElement('span');
+				const renderAuthor = document.createElement('span');
+				const renderFormat = document.createElement('span');
+				const renderNarrator = document.createElement('span');
+				const deleteButtonContainer = document.createElement('span');
+				const deleteButton = document.createElement('button');
+
+				renderTitle.textContent = audiobook.title;
+				renderAuthor.textContent = audiobook.author;
+				renderFormat.textContent = audiobook.format;
+				renderNarrator.textContent = audiobook.narrator;
+				deleteButton.textContent = 'Delete ❌';
+
+				liRow.classList.add('audio-books-row');
+				deleteButton.classList.add('delete-button');
+
+				AudioBooksUl.append(liRow);
+				liRow.append(renderTitle, renderAuthor, renderFormat, renderNarrator, deleteButtonContainer);
+				deleteButtonContainer.append(deleteButton);
+			})
 		}
 	}
 }
