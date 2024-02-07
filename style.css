@@ -57,14 +57,14 @@ input, select, button {
 	width: 100%;
 	padding: 0 1rem;
 }
-
+/* 
 .display-physical-books {
 	display: none;
 }
 
 .display-audio-books {
 	display: none;
-}
+} */
 
 .physical-books-header, .audio-books-header {
 	display: flex;
@@ -83,3 +83,28 @@ input, select, button {
 	align-items: center;
 }
 
+.physical-books-row,
+.audio-books-row {
+  display: flex;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: darkgray;
+}
+.physical-books-row span,
+.audio-books-row span {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-button {
+	width: 6rem;
+	height: 1.5rem;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 0.25rem;
+	border: none;
+  }
+  

@@ -4,12 +4,18 @@ const audiobooks = [];
 //SELECT ELEMENTS
 const audioButton = document.querySelector('.audio-button');
 const physicalButton = document.querySelector('.physical-button');
+
 const selectElement = document.querySelector('.format');
 const isbn = document.querySelector('.isbn');
 const narrator = document.querySelector('.narrator');
 const registerForm = document.querySelector('.book-form');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
+
+const displayPhysicalBooksContainer = document.querySelector('.display-physical-books');
+const displayAudioBooksContainer = document.querySelector('.display-audio-books');
+const physicalBooksUl = document.querySelector('.physical-books-list');
+const AudioBooksUl = document.querySelector('.audio-books-list');
 
 //SELECT FORMAT
 selectElement.addEventListener('change', ()=> {
@@ -43,7 +49,6 @@ registerForm.addEventListener('submit', (e) => {
 	Book.addBook(newBook);
 	console.log(newBook);
 	console.log(books);
-	console.log(audiobooks);
 })
 
 //DECLARING PHYSICAL BOOK CLASS
@@ -64,11 +69,51 @@ class Book {
 	}
 }
 
+physicalButton.addEventListener('click', () => {
+	UI.activeTab = 'physical';
+	UI.renderBooks(books);
+})
+
 //DECLARING AUDIO BOOK CLASS
 class Audiobook extends Book {
 	constructor(title, author, format, narrator) {
 		super(title, author, format);
 		this.narrator = narrator;
 		this.ID = Date.now();
+	}
+}
+
+//DECLARE UI CLASS
+class UI {
+	static activeTab = 'physical';
+	static renderBooks(books) {
+		displayPhysicalBooksContainer.style.display  = 'block';
+		displayAudioBooksContainer.style.display = 'none';
+
+		if (UI.activeTab === 'physical') {
+			books.forEach((book) => {
+				const liRow = document.createElement('li');
+				const renderTitle = document.createElement('span');
+				const renderAuthor = document.createElement('span');
+				const renderFormat = document.createElement('span');
+				const renderIsbn = document.createElement('span');
+				const deleteButtonContainer = document.createElement('span');
+				const deleteButton = document.createElement('button');
+
+				renderTitle.textContent = book.title;
+				renderAuthor.textContent = book.author;
+				renderFormat.textContent = book.format;
+				renderIsbn.textContent = book.isbn;
+				deleteButton.textContent = 'Delete ❌';
+
+				liRow.classList.add('physical-books-row');
+				deleteButton.classList.add('delete-button');
+
+
+				physicalBooksUl.append(liRow);
+				liRow.append(renderTitle, renderAuthor, renderFormat, renderIsbn, deleteButtonContainer);
+				deleteButtonContainer.append(deleteButton);
+			});
+		}
 	}
 }
