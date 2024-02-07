@@ -47,8 +47,7 @@ registerForm.addEventListener('submit', (e) => {
 		);
 	}
 	Book.addBook(newBook);
-	console.log(newBook);
-	console.log(books);
+	registerForm.reset();
 })
 
 //DECLARING PHYSICAL BOOK CLASS
@@ -65,6 +64,17 @@ class Book {
 			books.push(book);
 		} else {
 			audiobooks.push(book)
+		}
+	}
+	static deleteBook(id, booksArray) {
+		const index = booksArray.findIndex(book => book.ID.toString() === id.toString());
+		if(index !== -1) {
+			booksArray.splice(index, 1);
+			if(UI.activeTab === 'physical') {
+				UI.renderBooks(books)
+			} else {
+				UI.renderAudioBooks(audiobooks)
+			}
 		}
 	}
 }
@@ -115,9 +125,16 @@ class UI {
 				liRow.classList.add('physical-books-row');
 				deleteButton.classList.add('delete-button');
 
+				liRow.dataset.id = book.ID
+
 				physicalBooksUl.append(liRow);
 				liRow.append(renderTitle, renderAuthor, renderFormat, renderIsbn, deleteButtonContainer);
 				deleteButtonContainer.append(deleteButton);
+
+				deleteButton.addEventListener('click', (e) => {
+					const rowID = e.currentTarget.parentElement.parentElement.dataset.id;
+					Book.deleteBook(rowID, books);
+				})
 			});
 		}
 	}
@@ -146,9 +163,16 @@ class UI {
 				liRow.classList.add('audio-books-row');
 				deleteButton.classList.add('delete-button');
 
+				liRow.dataset.id = audiobook.ID
+
 				AudioBooksUl.append(liRow);
 				liRow.append(renderTitle, renderAuthor, renderFormat, renderNarrator, deleteButtonContainer);
 				deleteButtonContainer.append(deleteButton);
+
+				deleteButton.addEventListener('click', (e) => {
+					const rowID = e.currentTarget.parentElement.parentElement.dataset.id;
+					Book.deleteBook(rowID, audiobooks);
+				})
 			})
 		}
 	}
